@@ -1,0 +1,262 @@
+/* =========================
+   Container
+   ========================= */
+
+.headerInfo {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+}
+
+.statisticsMenu {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* =========================
+   Trophy
+   ========================= */
+
+.trophyButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 44px;
+	height: 44px;
+	padding: 0;
+
+	color: #94a3b8;
+	background: transparent;
+
+	border: none;
+	border-radius: 10px;
+
+	cursor: pointer;
+
+	transition:
+		color 150ms ease,
+		background-color 150ms ease,
+		transform 150ms ease;
+}
+
+.trophyButton:hover {
+	color: #fbbf24;
+	background-color: rgba(251, 191, 36, 0.07);
+
+	transform: translateY(-1px);
+}
+
+.trophyButton:active {
+	transform: translateY(0) scale(0.96);
+}
+
+/* =========================
+   Dropdown
+   ========================= */
+
+.statisticsDropdown {
+	position: absolute;
+
+	top: calc(100% + 10px);
+	right: 0;
+
+	width: 220px;
+	padding: 16px;
+
+	box-sizing: border-box;
+
+	background: rgb(15, 17, 32);
+
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 14px;
+
+	box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+
+	z-index: 100;
+
+	transform-origin: top right;
+
+	animation: dropdownOpen 150ms ease-out;
+}
+
+/* =========================
+   Open / Close
+   ========================= */
+
+.dropdownOpen {
+	opacity: 1;
+
+	transform: translateY(0) scale(1);
+}
+
+@keyframes dropdownOpen {
+	from {
+		opacity: 0;
+
+		transform: translateY(-6px) scale(0.98);
+	}
+
+	to {
+		opacity: 1;
+
+		transform: translateY(0) scale(1);
+	}
+}
+
+.trophyButtonActive {
+	color: #fbbf24;
+
+	background-color: rgba(251, 191, 36, 0.08);
+
+	filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.35))
+		drop-shadow(0 0 10px rgba(251, 191, 36, 0.15));
+}
+.trophyButtonActive svg {
+	filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.55))
+		drop-shadow(0 0 9px rgba(251, 191, 36, 0.25));
+}
+
+/* =========================
+   Title
+   ========================= */
+
+.statisticsTitle {
+	margin: 0 0 14px;
+
+	font-size: 11px;
+	font-weight: 600;
+
+	color: rgb(71, 85, 105);
+
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+/* =========================
+   Rows
+   ========================= */
+
+.statisticsRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	min-height: 34px;
+
+	padding: 7px 0;
+
+	border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.statisticsRow:last-child {
+	border-bottom: none;
+}
+
+.statisticsName {
+	display: flex;
+	align-items: center;
+
+	gap: 9px;
+
+	font-size: 14px;
+	font-weight: 500;
+
+	color: #94a3b8;
+}
+
+/* =========================
+   Dots
+   ========================= */
+
+.statisticsDot {
+	width: 7px;
+	height: 7px;
+
+	flex-shrink: 0;
+
+	border-radius: 50%;
+}
+
+.knownDot {
+	background-color: #2dd4bf;
+
+	box-shadow: 0 0 7px rgba(45, 212, 191, 0.4);
+}
+
+.learningDot {
+	background-color: #fb7185;
+
+	box-shadow: 0 0 7px rgba(251, 113, 133, 0.4);
+}
+
+.likesDot {
+	background-color: #c084fc;
+
+	box-shadow: 0 0 7px rgba(192, 132, 252, 0.4);
+}
+
+/* =========================
+   Values
+   ========================= */
+
+.knownValue,
+.learningValue,
+.likesValue {
+	font-family: "JetBrains Mono", monospace;
+
+	font-size: 13px;
+	font-weight: 600;
+}
+
+.knownValue {
+	color: #5eead4;
+}
+
+.learningValue {
+	color: #fb7185;
+}
+
+.likesValue {
+	color: #c084fc;
+}
+
+/* =========================
+   Profile
+   ========================= */
+
+.profile {
+	display: none;
+	align-items: center;
+	justify-content: center;
+
+	width: 44px;
+	height: 44px;
+	padding: 0;
+
+	color: #94a3b8;
+	background: transparent;
+
+	border: none;
+	border-radius: 10px;
+
+	cursor: pointer;
+
+	transition:
+		color 150ms ease,
+		background-color 150ms ease,
+		transform 150ms ease;
+}
+
+.profile:hover {
+	color: #c4b5fd;
+
+	background-color: rgba(167, 139, 250, 0.08);
+}
+
+.profile:active {
+	transform: scale(0.96);
+}

@@ -1,0 +1,763 @@
+/* =========================================================
+   TOOLBAR
+   ========================================================= */
+
+.toolbar {
+	position: relative;
+	z-index: 30;
+
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 10px;
+
+	width: 100%;
+
+	padding: 10px 20px 14px;
+
+	box-sizing: border-box;
+
+	background: #080b14;
+}
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.search {
+	position: relative;
+
+	width: 270px;
+	height: 48px;
+
+	flex-shrink: 0;
+
+	background: rgba(15, 18, 34, 0.94);
+	border: 1px solid rgba(255, 255, 255, 0.085);
+	border-radius: 16px;
+
+	box-shadow:
+		0 10px 28px rgba(0, 0, 0, 0.24),
+		inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+	transition:
+		border-color 180ms ease,
+		box-shadow 180ms ease,
+		background-color 180ms ease;
+}
+
+.search:focus-within,
+.searchActive {
+	border-color: rgba(167, 139, 250, 0.38);
+
+	box-shadow:
+		0 10px 30px rgba(99, 102, 241, 0.13),
+		inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.searchIcon {
+	position: absolute;
+
+	top: 50%;
+	left: 16px;
+
+	color: #64748b;
+
+	transform: translateY(-50%);
+
+	pointer-events: none;
+
+	transition: color 180ms ease;
+}
+
+.search:focus-within .searchIcon,
+.searchActive .searchIcon {
+	color: #c4b5fd;
+}
+
+.searchInput {
+	width: 100%;
+	height: 100%;
+
+	padding: 0 42px 0 44px;
+
+	box-sizing: border-box;
+
+	font-family: inherit;
+	font-size: 12px;
+
+	color: #e2e8f0;
+
+	background: transparent;
+	border: none;
+
+	outline: none;
+}
+
+.searchInput::placeholder {
+	color: #64748b;
+}
+
+/*
+ * Убираем стандартный крестик input[type="search"],
+ * потому что используем собственный.
+ */
+
+.searchInput::-webkit-search-cancel-button {
+	display: none;
+}
+
+.clearSearch {
+	position: absolute;
+
+	top: 50%;
+	right: 13px;
+
+	width: 22px;
+	height: 22px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	padding: 0;
+
+	color: #a78bfa;
+
+	background: rgba(167, 139, 250, 0.09);
+	border: none;
+	border-radius: 50%;
+
+	transform: translateY(-50%);
+
+	cursor: pointer;
+
+	transition:
+		background-color 150ms ease,
+		transform 150ms ease;
+}
+
+.clearSearch:hover {
+	background: rgba(167, 139, 250, 0.18);
+
+	transform: translateY(-50%) scale(1.08);
+}
+
+/* =========================================================
+   DROPDOWN COMMON
+   ========================================================= */
+
+.dropdown {
+	position: relative;
+
+	flex-shrink: 0;
+}
+
+.dropdownButton {
+	width: 142px;
+	height: 48px;
+
+	padding: 0 14px;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	font-family: inherit;
+
+	color: #cbd5e1;
+
+	background: rgba(15, 18, 34, 0.94);
+	border: 1px solid rgba(255, 255, 255, 0.085);
+	border-radius: 16px;
+
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+
+	cursor: pointer;
+
+	transition:
+		background-color 180ms ease,
+		border-color 180ms ease,
+		box-shadow 180ms ease,
+		transform 150ms ease;
+}
+
+.dropdownButton:hover {
+	background: rgba(20, 23, 42, 0.98);
+
+	border-color: rgba(167, 139, 250, 0.2);
+}
+
+.dropdownButton:active {
+	transform: scale(0.98);
+}
+
+.dropdownButtonActive {
+	background: rgba(27, 25, 53, 0.98);
+
+	border-color: rgba(167, 139, 250, 0.28);
+}
+
+.statusDropdownButton {
+	width: 166px;
+}
+
+.dropdownContent {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+
+	min-width: 0;
+}
+
+.dropdownInformation {
+	min-width: 0;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1px;
+}
+
+.dropdownLabel {
+	font-size: 9px;
+
+	color: #475569;
+}
+
+.dropdownValue {
+	max-width: 90px;
+
+	overflow: hidden;
+
+	font-size: 11px;
+	font-weight: 600;
+
+	color: #cbd5e1;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.chevron {
+	flex-shrink: 0;
+
+	color: #64748b;
+
+	transition: transform 180ms ease;
+}
+
+.chevronOpen {
+	transform: rotate(180deg);
+}
+
+/* =========================================================
+   LEVEL ICON
+   ========================================================= */
+
+.levelIcon {
+	width: 28px;
+	height: 28px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex-shrink: 0;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 9px;
+	font-weight: 800;
+
+	border: 1px solid transparent;
+	border-radius: 9px;
+}
+
+.levelAll {
+	color: #a78bfa;
+
+	background: rgba(167, 139, 250, 0.09);
+}
+
+.levelA2 {
+	color: #34d399;
+
+	background: rgba(52, 211, 153, 0.15);
+	border-color: rgba(52, 211, 153, 0.2);
+}
+
+.levelB1 {
+	color: #60a5fa;
+
+	background: rgba(96, 165, 250, 0.15);
+	border-color: rgba(96, 165, 250, 0.2);
+}
+
+.levelB2 {
+	color: #a78bfa;
+
+	background: rgba(167, 139, 250, 0.15);
+	border-color: rgba(167, 139, 250, 0.2);
+}
+
+.levelC1 {
+	color: #fb923c;
+
+	background: rgba(251, 146, 60, 0.15);
+	border-color: rgba(251, 146, 60, 0.2);
+}
+
+/* =========================================================
+   LEVEL MENU
+   ========================================================= */
+
+.levelDropdownMenu {
+	position: absolute;
+
+	top: 56px;
+	left: 0;
+	z-index: 80;
+
+	width: 190px;
+
+	padding: 8px;
+
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 6px;
+
+	box-sizing: border-box;
+
+	background: rgba(15, 18, 34, 0.98);
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	border-radius: 16px;
+
+	box-shadow: 0 22px 55px rgba(0, 0, 0, 0.58);
+
+	backdrop-filter: blur(20px);
+
+	animation: dropdownOpen 160ms ease;
+}
+
+.levelOption {
+	height: 38px;
+
+	padding: 0;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 10px;
+	font-weight: 700;
+
+	color: #64748b;
+
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 11px;
+
+	cursor: pointer;
+
+	transition:
+		color 150ms ease,
+		background-color 150ms ease,
+		border-color 150ms ease,
+		transform 150ms ease;
+}
+
+.levelOption:hover {
+	color: #cbd5e1;
+
+	background: rgba(255, 255, 255, 0.04);
+}
+
+.levelOption:active {
+	transform: scale(0.96);
+}
+
+.levelOptionAll {
+	color: #c4b5fd;
+
+	background: rgba(167, 139, 250, 0.12);
+	border-color: rgba(167, 139, 250, 0.25);
+}
+
+.levelOptionA2 {
+	color: #34d399;
+
+	background: rgba(52, 211, 153, 0.15);
+	border-color: rgba(52, 211, 153, 0.3);
+}
+
+.levelOptionB1 {
+	color: #60a5fa;
+
+	background: rgba(96, 165, 250, 0.15);
+	border-color: rgba(96, 165, 250, 0.3);
+}
+
+.levelOptionB2 {
+	color: #a78bfa;
+
+	background: rgba(167, 139, 250, 0.15);
+	border-color: rgba(167, 139, 250, 0.3);
+}
+
+.levelOptionC1 {
+	color: #fb923c;
+
+	background: rgba(251, 146, 60, 0.15);
+	border-color: rgba(251, 146, 60, 0.3);
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.statusDot,
+.statusOptionDot {
+	flex-shrink: 0;
+
+	border-radius: 50%;
+}
+
+.statusDot {
+	width: 8px;
+	height: 8px;
+}
+
+.statusOptionDot {
+	width: 6px;
+	height: 6px;
+}
+
+.statusDotAll {
+	background: #a78bfa;
+	box-shadow: 0 0 10px #a78bfa;
+}
+
+.statusDotUnseen {
+	background: #94a3b8;
+	box-shadow: 0 0 10px #94a3b8;
+}
+
+.statusDotKnown {
+	background: #34d399;
+	box-shadow: 0 0 10px #34d399;
+}
+
+.statusDotUnknown {
+	background: #f87171;
+	box-shadow: 0 0 10px #f87171;
+}
+
+.statusDotFavorites {
+	background: #fb7185;
+	box-shadow: 0 0 10px #fb7185;
+}
+
+.statusDotArchived {
+	background: #60a5fa;
+	box-shadow: 0 0 10px #60a5fa;
+}
+
+/* =========================================================
+   STATUS MENU
+   ========================================================= */
+
+.statusDropdownMenu {
+	position: absolute;
+
+	top: 56px;
+	left: 0;
+	z-index: 80;
+
+	width: 210px;
+
+	padding: 8px;
+
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+
+	box-sizing: border-box;
+
+	background: rgba(15, 18, 34, 0.98);
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	border-radius: 16px;
+
+	box-shadow: 0 22px 55px rgba(0, 0, 0, 0.58);
+
+	backdrop-filter: blur(20px);
+
+	animation: dropdownOpen 160ms ease;
+}
+
+.statusOption {
+	width: 100%;
+	height: 38px;
+
+	padding: 0 11px;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	font-family: inherit;
+	font-size: 11px;
+
+	color: #64748b;
+
+	background: transparent;
+	border: none;
+	border-radius: 10px;
+
+	cursor: pointer;
+
+	transition:
+		color 150ms ease,
+		background-color 150ms ease;
+}
+
+.statusOption:hover {
+	color: #cbd5e1;
+
+	background: rgba(255, 255, 255, 0.04);
+}
+
+.statusOptionActive {
+	color: #c4b5fd;
+
+	background: rgba(167, 139, 250, 0.06);
+}
+
+.statusOptionLeft {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+.resetButton {
+	width: 48px;
+	height: 48px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	flex-shrink: 0;
+
+	padding: 0;
+
+	color: #f87171;
+
+	background: rgba(15, 18, 34, 0.94);
+	border: 1px solid rgba(248, 113, 113, 0.13);
+	border-radius: 16px;
+
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+
+	cursor: pointer;
+
+	transition:
+		background-color 150ms ease,
+		border-color 150ms ease,
+		transform 150ms ease;
+}
+
+.resetButton:hover {
+	background: rgba(248, 113, 113, 0.08);
+	border-color: rgba(248, 113, 113, 0.3);
+
+	transform: translateY(-1px);
+}
+
+.resetButton:active {
+	transform: scale(0.96);
+}
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.result {
+	height: 48px;
+	min-width: 118px;
+
+	padding: 0 14px;
+
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	box-sizing: border-box;
+
+	flex-shrink: 0;
+
+	background: rgba(15, 18, 34, 0.94);
+	border: 1px solid rgba(255, 255, 255, 0.085);
+	border-radius: 16px;
+
+	box-shadow: 0 10px 28px rgba(0, 0, 0, 0.24);
+}
+
+.progressCircle {
+	position: relative;
+
+	width: 30px;
+	height: 30px;
+
+	flex-shrink: 0;
+}
+
+.progressCircle svg {
+	display: block;
+
+	transform: rotate(-90deg);
+}
+
+.progressCircleBackground {
+	fill: none;
+
+	stroke: rgba(255, 255, 255, 0.06);
+	stroke-width: 2.5;
+}
+
+.progressCircleValue {
+	fill: none;
+
+	stroke: #a78bfa;
+	stroke-width: 2.5;
+	stroke-linecap: round;
+
+	filter: drop-shadow(0 0 4px rgba(167, 139, 250, 0.45));
+
+	transition: stroke-dashoffset 500ms ease;
+}
+
+.progressCircle > span {
+	position: absolute;
+	inset: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 8px;
+	font-weight: 700;
+
+	color: #a78bfa;
+}
+
+.resultText {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+}
+
+.resultText strong {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 12px;
+	font-weight: 700;
+
+	color: #f1f5f9;
+}
+
+.resultText span {
+	font-size: 9px;
+
+	color: #475569;
+
+	white-space: nowrap;
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes dropdownOpen {
+	from {
+		opacity: 0;
+
+		transform: translateY(-6px);
+	}
+
+	to {
+		opacity: 1;
+
+		transform: translateY(0);
+	}
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+	.toolbar {
+		justify-content: flex-start;
+
+		padding: 10px 16px 14px;
+	}
+
+	.search {
+		width: calc(100% - 128px);
+		flex-grow: 1;
+	}
+
+	.result {
+		margin-left: auto;
+	}
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+	.toolbar {
+		gap: 8px;
+
+		padding: 10px 12px 14px;
+	}
+
+	.search {
+		width: 100%;
+
+		flex-basis: 100%;
+	}
+
+	.dropdown {
+		flex: 1;
+	}
+
+	.dropdownButton {
+		width: 100%;
+	}
+
+	.statusDropdownButton {
+		width: 100%;
+	}
+
+	.levelDropdownMenu,
+	.statusDropdownMenu {
+		width: 100%;
+		min-width: 180px;
+	}
+
+	.resetButton {
+		width: 48px;
+	}
+
+	.result {
+		flex: 1;
+
+		min-width: 110px;
+
+		margin-left: 0;
+	}
+}

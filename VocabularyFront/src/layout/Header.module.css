@@ -1,0 +1,109 @@
+.header {
+	position: relative;
+	z-index: 10;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	width: 100%;
+	padding: 0px 32px;
+
+	box-sizing: border-box;
+
+	background:
+		linear-gradient(
+			90deg,
+			rgba(139, 92, 246, 0.035),
+			transparent 35%,
+			transparent 70%,
+			rgba(56, 189, 248, 0.025)
+		),
+		#0d1018;
+
+	border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* =========================
+   Logo
+   ========================= */
+
+.logo {
+	display: flex;
+	align-items: center;
+}
+
+.logoImage {
+	display: block;
+
+	width: 150px;
+	height: auto;
+
+	object-fit: contain;
+}
+
+/* =========================
+   Separator
+   ========================= */
+
+.hr {
+	border: none;
+
+	height: 1px;
+	margin: 0;
+
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(139, 92, 246, 0.25),
+		rgba(148, 163, 184, 0.12),
+		rgba(56, 189, 248, 0.18),
+		transparent
+	);
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 1200px) {
+	.profile {
+		display: flex;
+	}
+	.account {
+		display: none;
+	}
+}
+
+@media (max-width: 768px) {
+	.profile {
+		display: flex;
+	}
+	.account {
+		display: none;
+	}
+	.header {
+		padding: 16px 20px;
+	}
+
+	.statistics {
+		gap: 12px;
+	}
+
+	.statisticLabel {
+		font-size: 18px;
+	}
+}
+
+@media (max-width: 576px) {
+	.profile {
+		display: flex;
+	}
+	.account {
+		display: none;
+	}
+
+	.statistics {
+		display: none;
+	}
+}
