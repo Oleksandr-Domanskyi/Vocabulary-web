@@ -1,3 +1,7 @@
+/* =========================================
+   ACCOUNT
+   ========================================= */
+
 .account {
 	display: flex;
 	align-items: center;
@@ -9,12 +13,16 @@
 
 	cursor: pointer;
 
-	transition: background-color 0.2s ease;
+	transition: background-color 200ms ease;
 }
 
 .account:hover {
-	background-color: rgba(255, 255, 255, 0.04);
+	background-color: rgba(167, 139, 250, 0.06);
 }
+
+/* =========================================
+   AVATAR
+   ========================================= */
 
 .accountImage {
 	width: 40px;
@@ -26,8 +34,12 @@
 
 	border-radius: 50%;
 
-	border: 1px solid rgba(167, 139, 250, 0.25);
+	border: 1px solid rgba(167, 139, 250, 0.3);
 }
+
+/* =========================================
+   EMAIL
+   ========================================= */
 
 .accountEmail {
 	margin: 0;
@@ -36,51 +48,62 @@
 	font-size: 15px;
 	font-weight: 500;
 
-	color: #b8c4d6;
+	color: #e7e0ee;
+
+	white-space: nowrap;
 }
+
+/* =========================================
+   LEVEL
+   ========================================= */
+
 .accountLevel {
-	padding: 3px 10px;
-	border-radius: 20px;
-	background: rgba(20, 184, 166, 0.15);
-	border: 1px solid rgba(20, 184, 166, 0.35);
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+
+	padding: 4px 10px;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 12px;
+	font-weight: 700;
+
+	border: 1px solid transparent;
 	border-radius: 20px;
+
+	white-space: nowrap;
 }
 
 /* 1–5 */
 
 .levelDefault {
-	color: #94a3b8;
-
-	background-color: rgba(148, 163, 184, 0.08);
-	border-color: rgba(148, 163, 184, 0.2);
+	color: #a49bad;
+	background: rgba(164, 155, 173, 0.08);
+	border-color: rgba(164, 155, 173, 0.2);
 }
 
 /* 6–10 */
 
 .levelGreen {
 	color: #4ade80;
-
-	background-color: rgba(74, 222, 128, 0.08);
+	background: rgba(74, 222, 128, 0.08);
 	border-color: rgba(74, 222, 128, 0.2);
 }
 
 /* 11–20 */
 
 .levelBlue {
-	color: #38bdf8;
-
-	background-color: rgba(56, 189, 248, 0.08);
-	border-color: rgba(56, 189, 248, 0.22);
+	color: #60a5fa;
+	background: rgba(96, 165, 250, 0.08);
+	border-color: rgba(96, 165, 250, 0.22);
 }
 
 /* 21–30 */
 
 .levelPurple {
 	color: #c084fc;
-
-	background-color: rgba(192, 132, 252, 0.09);
+	background: rgba(192, 132, 252, 0.09);
 	border-color: rgba(192, 132, 252, 0.24);
 }
 
@@ -88,8 +111,7 @@
 
 .levelGold {
 	color: #fbbf24;
-
-	background-color: rgba(251, 191, 36, 0.09);
+	background: rgba(251, 191, 36, 0.09);
 	border-color: rgba(251, 191, 36, 0.25);
 }
 
@@ -97,12 +119,16 @@
 
 .levelLegendary {
 	color: #fb7185;
-
-	background-color: rgba(251, 113, 133, 0.1);
+	background: rgba(251, 113, 133, 0.1);
 	border-color: rgba(251, 113, 133, 0.28);
 
 	box-shadow: 0 0 12px rgba(251, 113, 133, 0.1);
 }
+
+/* =========================================
+   DAILY STREAK
+   ========================================= */
+
 .dailyStreak {
 	display: flex;
 	align-items: center;
@@ -112,8 +138,6 @@
 
 	color: #f59e0b;
 }
-
-/*   fire */
 
 .streakIcon {
 	width: 40px;
@@ -150,14 +174,15 @@
 	font-size: 12px;
 	font-weight: 600;
 
-	color: #a1a8b8;
+	color: #a49bad;
 
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 }
-/* =========================
-   Flame animation
-   ========================= */
+
+/* =========================================
+   FLAME ANIMATION
+   ========================================= */
 
 @keyframes flameBurn {
 	0% {
@@ -200,5 +225,135 @@
 	50% {
 		opacity: 1;
 		transform: scale(1.05);
+	}
+}
+/* =========================================
+   ACCOUNT DIVIDER
+   ========================================= */
+
+.accountDivider {
+	width: 1px;
+	height: 34px;
+
+	flex-shrink: 0;
+	margin: 0 12px;
+
+	background: linear-gradient(
+		180deg,
+		transparent 0%,
+		#51445f 20%,
+		#655477 50%,
+		#51445f 80%,
+		transparent 100%
+	);
+}
+
+.accountWrapper {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.account {
+	font: inherit;
+	text-align: left;
+	border: none;
+	color: inherit;
+	background: transparent;
+	cursor: pointer;
+}
+
+.account:hover,
+.account[aria-expanded="true"] {
+	background: rgba(167, 139, 250, 0.06);
+}
+
+.account:focus-visible {
+	outline: 2px solid #a78bfa;
+	outline-offset: 3px;
+}
+
+@media (max-width: 576px) {
+	.accountDivider {
+		height: 26px;
+		margin: 0 6px;
+	}
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 768px) {
+	.account {
+		gap: 9px;
+		padding: 6px 8px;
+	}
+
+	.accountImage {
+		width: 36px;
+		height: 36px;
+	}
+
+	.accountEmail {
+		font-size: 13px;
+	}
+
+	.streakIcon {
+		width: 34px;
+		height: 34px;
+	}
+
+	.streakValue {
+		font-size: 15px;
+	}
+
+	.streakUnit {
+		font-size: 10px;
+	}
+}
+
+@media (max-width: 576px) {
+	.account {
+		gap: 8px;
+		padding: 4px;
+	}
+
+	.accountImage {
+		width: 32px;
+		height: 32px;
+	}
+
+	.accountEmail {
+		display: none;
+	}
+
+	.accountLevel {
+		padding: 3px 7px;
+		font-size: 10px;
+	}
+
+	.dailyStreak {
+		gap: 4px;
+	}
+
+	.streakIcon {
+		width: 28px;
+		height: 28px;
+	}
+
+	.streakValue {
+		font-size: 13px;
+	}
+
+	.streakUnit {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.streakIcon,
+	.streakInner {
+		animation: none;
 	}
 }

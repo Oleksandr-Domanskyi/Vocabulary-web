@@ -1,0 +1,327 @@
+.SideBar {
+	position: sticky;
+	top: 70px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-shrink: 0;
+
+	width: 200px;
+	height: calc(100vh - 70px);
+	min-height: 450px;
+	padding: 20px 12px 14px;
+
+	box-sizing: border-box;
+
+	background:
+		radial-gradient(
+			ellipse at 50% 70%,
+			rgba(85, 45, 130, 0.06),
+			transparent 65%
+		),
+		#0c0d17;
+
+	border-right: 1px solid #242638;
+}
+
+/* Navigation */
+
+.navigation {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.navItem {
+	position: relative;
+
+	display: flex;
+	align-items: center;
+	gap: 12px;
+
+	width: 100%;
+	min-height: 42px;
+	padding: 0 12px;
+
+	color: #8990ad;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 10px;
+
+	font-family: inherit;
+	font-size: 12px;
+	font-weight: 500;
+	text-align: left;
+
+	cursor: pointer;
+
+	transition:
+		background 0.2s ease,
+		color 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.navItem:hover {
+	color: #f1f2f8;
+	background: rgba(139, 92, 246, 0.08);
+}
+
+.navItem.active {
+	color: #e9ddff;
+
+	background: linear-gradient(
+		90deg,
+		rgba(139, 92, 246, 0.22),
+		rgba(85, 50, 150, 0.12)
+	);
+
+	border-color: rgba(139, 92, 246, 0.22);
+
+	box-shadow:
+		0 0 18px rgba(139, 92, 246, 0.1),
+		inset 0 0 12px rgba(139, 92, 246, 0.06);
+}
+
+.navIcon {
+	flex-shrink: 0;
+	color: #8990ad;
+}
+
+.navItem.active .navIcon {
+	color: #a78bfa;
+}
+
+.navLabel {
+	flex: 1;
+	white-space: nowrap;
+}
+
+.navCount {
+	color: #8990ad;
+	font-size: 11px;
+	font-variant-numeric: tabular-nums;
+}
+
+.navItem.active .navCount {
+	color: #c4b5fd;
+}
+
+/* Daily Progress Card */
+
+.dailyCard {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+
+	padding: 16px 14px 12px;
+
+	background: linear-gradient(
+		145deg,
+		rgba(22, 20, 38, 0.95),
+		rgba(14, 14, 26, 0.98)
+	);
+
+	border: 1px solid #242638;
+	border-radius: 14px;
+}
+
+.dailyTitle {
+	color: #b59bea;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.progressContent {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.progressCircle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+
+	transform: rotate(-90deg);
+}
+
+.progressInner {
+	width: 36px;
+	height: 36px;
+
+	background: #10111e;
+	border-radius: 50%;
+}
+
+.progressInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.progressInfo strong {
+	color: #f1f2f8;
+	font-size: 15px;
+	font-weight: 700;
+}
+
+.progressInfo span {
+	color: #8990ad;
+	font-size: 10px;
+	white-space: nowrap;
+}
+
+/* Continue Button */
+
+.continueButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+
+	width: 100%;
+	min-height: 32px;
+
+	color: #e5d9ff;
+
+	background: linear-gradient(
+		90deg,
+		rgba(100, 55, 175, 0.32),
+		rgba(75, 40, 135, 0.38)
+	);
+
+	border: 1px solid rgba(139, 92, 246, 0.2);
+	border-radius: 7px;
+
+	font-family: inherit;
+	font-size: 11px;
+
+	cursor: pointer;
+
+	transition:
+		background 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.continueButton:hover {
+	background: rgba(111, 65, 210, 0.4);
+	box-shadow: 0 0 12px rgba(120, 75, 225, 0.15);
+}
+
+.navItem:focus-visible,
+.continueButton:focus-visible {
+	outline: 2px solid #a78bfa;
+	outline-offset: 2px;
+}
+
+/* Obsidian Dark — Sidebar */
+
+.SideBar {
+	background: #09090d;
+	border-right-color: #202026;
+}
+
+.navItem {
+	color: #96949f;
+}
+
+.navItem:hover {
+	color: #f2f0f7;
+	background: #19151f;
+}
+
+.navItem.active {
+	color: #eee6ff;
+	background: linear-gradient(
+		90deg,
+		rgba(139, 92, 246, 0.2),
+		rgba(139, 92, 246, 0.06)
+	);
+	border-color: rgba(139, 92, 246, 0.18);
+	box-shadow: inset 3px 0 0 #8b5cf6;
+}
+
+.navIcon,
+.navCount {
+	color: #85818f;
+}
+
+.navItem.active .navIcon,
+.navItem.active .navCount {
+	color: #b99aff;
+}
+
+.dailyCard {
+	background: #111015;
+	border-color: #29242f;
+}
+
+.dailyTitle {
+	color: #c5a9ff;
+}
+
+.progressInner {
+	background: #111015;
+}
+
+.progressInfo strong {
+	color: #f3f0f7;
+}
+
+.progressInfo span {
+	color: #918b9b;
+}
+
+.continueButton {
+	color: #e9ddff;
+	background: #291d3e;
+	border-color: #46305f;
+}
+
+.continueButton:hover {
+	background: #382653;
+	box-shadow: 0 0 12px rgba(139, 92, 246, 0.12);
+}
+
+/* Tablet */
+
+@media (max-width: 900px) {
+	.SideBar {
+		width: 70px;
+		padding: 16px 8px;
+	}
+
+	.navItem {
+		justify-content: center;
+		padding: 0;
+	}
+
+	.navLabel,
+	.navCount,
+	.dailyCard {
+		display: none;
+	}
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+	.SideBar {
+		display: none;
+	}
+}
+
+/* Reduced Motion */
+
+@media (prefers-reduced-motion: reduce) {
+	.navItem,
+	.continueButton {
+		transition: none;
+	}
+}

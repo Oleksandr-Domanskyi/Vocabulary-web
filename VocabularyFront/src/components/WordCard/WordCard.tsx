@@ -65,12 +65,18 @@ const WordCard = ({
 					aria-label={
 						isFavorite ? "Удалить из избранного" : "Добавить в избранное"
 					}>
-					<svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+					<svg
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg">
 						<path
-							d="M7.5 13s-6-3.75-6-7.5a3.5 3.5 0 017 0 3.5 3.5 0 017 0c0 3.75-6 7.5-6 7.5z"
+							d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
 							fill={isFavorite ? "currentColor" : "none"}
 							stroke="currentColor"
-							strokeWidth="1.4"
+							strokeWidth="1.8"
+							strokeLinecap="round"
 							strokeLinejoin="round"
 						/>
 					</svg>

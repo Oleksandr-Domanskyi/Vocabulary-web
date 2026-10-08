@@ -1,0 +1,693 @@
+/* =========================================
+   PROFILE POPOVER
+   ========================================= */
+
+.popover {
+	position: absolute;
+	top: calc(100% + 12px);
+	right: 0;
+	z-index: 1000;
+
+	width: 390px;
+	max-width: calc(100vw - 24px);
+	max-height: calc(100dvh - 110px);
+
+	padding: 20px;
+	box-sizing: border-box;
+
+	overflow-y: auto;
+	overscroll-behavior: contain;
+
+	color: #f3f0f7;
+	background: #111015;
+
+	border: 1px solid #302838;
+	border-radius: 18px;
+
+	box-shadow:
+		0 24px 65px rgba(0, 0, 0, 0.6),
+		0 0 30px rgba(139, 92, 246, 0.07);
+
+	animation: popoverEnter 200ms ease-out both;
+
+	scrollbar-width: thin;
+	scrollbar-color: #40334d transparent;
+}
+
+@keyframes popoverEnter {
+	from {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* =========================================
+   PROFILE
+   ========================================= */
+
+.profile {
+	display: flex;
+	align-items: flex-start;
+	gap: 14px;
+}
+
+.avatarWrapper {
+	position: relative;
+	flex-shrink: 0;
+}
+
+.avatar {
+	display: block;
+
+	width: 64px;
+	height: 64px;
+
+	object-fit: cover;
+
+	border: 2px solid rgba(167, 139, 250, 0.55);
+	border-radius: 50%;
+
+	box-shadow: 0 0 18px rgba(139, 92, 246, 0.15);
+}
+
+.avatarDecoration {
+	position: absolute;
+	right: -3px;
+	bottom: -3px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 24px;
+	height: 24px;
+
+	color: #e9ddff;
+	background: #6d28d9;
+
+	border: 3px solid #111015;
+	border-radius: 50%;
+}
+
+.profileInfo {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 5px;
+
+	min-width: 0;
+}
+
+.nicknameRow {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+
+	width: 100%;
+	min-width: 0;
+}
+
+.nickname {
+	margin: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	font-family: Outfit, system-ui, sans-serif;
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.3;
+
+	color: #f3f0f7;
+}
+
+.editButton {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 26px;
+	height: 26px;
+	flex-shrink: 0;
+	padding: 0;
+
+	color: #918b9b;
+	background: transparent;
+
+	border: none;
+	border-radius: 7px;
+
+	cursor: pointer;
+
+	transition:
+		color 180ms ease,
+		background-color 180ms ease;
+}
+
+.editButton:hover {
+	color: #c4b5fd;
+	background: rgba(139, 92, 246, 0.14);
+}
+
+.editButton:focus-visible {
+	outline: 2px solid #a78bfa;
+	outline-offset: 2px;
+}
+
+.email {
+	max-width: 100%;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+
+	font-size: 12px;
+	color: #a49bad;
+}
+
+.profileBadge {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+
+	margin-top: 3px;
+	padding: 4px 9px;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 10px;
+	font-weight: 600;
+
+	color: #c4b5fd;
+	background: rgba(139, 92, 246, 0.12);
+
+	border: 1px solid rgba(139, 92, 246, 0.25);
+	border-radius: 20px;
+}
+
+.closeButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 28px;
+	height: 28px;
+	flex-shrink: 0;
+	padding: 0;
+
+	color: #918b9b;
+	background: transparent;
+
+	border: none;
+	border-radius: 8px;
+
+	cursor: pointer;
+}
+
+.closeButton:hover {
+	color: #f3f0f7;
+	background: rgba(167, 139, 250, 0.1);
+}
+
+/* =========================================
+   VISUAL EDITING
+   ========================================= */
+
+.editableField {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+
+	width: 100%;
+	min-width: 0;
+
+	padding: 7px 10px;
+	box-sizing: border-box;
+
+	color: #e7dafa;
+	background: rgba(139, 92, 246, 0.06);
+
+	border: 1px solid rgba(139, 92, 246, 0.35);
+	border-radius: 8px;
+
+	font-family: Outfit, sans-serif;
+	font-size: 12px;
+
+	cursor: text;
+
+	transition:
+		background-color 180ms ease,
+		border-color 180ms ease,
+		box-shadow 180ms ease;
+}
+
+.editableField span {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.editableField svg {
+	flex-shrink: 0;
+	color: #a78bfa;
+}
+
+.editableField:hover {
+	background: rgba(139, 92, 246, 0.12);
+	border-color: #a78bfa;
+
+	box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.08);
+}
+
+.avatarEditable {
+	cursor: pointer;
+}
+
+.avatarEditable .avatar {
+	border-color: #a78bfa;
+}
+
+.avatarEditOverlay {
+	position: absolute;
+	inset: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	color: #c4b5fd;
+	background: rgba(9, 9, 13, 0.65);
+
+	border: 2px solid #8b5cf6;
+	border-radius: 50%;
+
+	opacity: 0;
+	pointer-events: none;
+
+	transition: opacity 180ms ease;
+}
+
+.avatarEditable:hover .avatarEditOverlay {
+	opacity: 1;
+}
+
+/* =========================================
+   DIVIDER
+   ========================================= */
+
+.divider {
+	height: 1px;
+	margin: 18px 0;
+
+	background: linear-gradient(
+		90deg,
+		transparent,
+		#302838 15%,
+		#40334d 50%,
+		#302838 85%,
+		transparent
+	);
+}
+
+/* =========================================
+   EXPERIENCE
+   ========================================= */
+
+.experience {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.sectionHeading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.levelHeading {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	font-size: 14px;
+	font-weight: 600;
+
+	color: #e8dfff;
+}
+
+.levelHeading svg {
+	color: #a78bfa;
+}
+
+.xpValue {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 11px;
+	font-weight: 600;
+
+	color: #c4b5fd;
+	white-space: nowrap;
+}
+
+.xpTrack {
+	height: 10px;
+	overflow: hidden;
+
+	background: #29232f;
+
+	border: 1px solid rgba(167, 139, 250, 0.12);
+	border-radius: 20px;
+}
+
+.xpFill {
+	height: 100%;
+
+	background: linear-gradient(90deg, #6d28d9, #8b5cf6, #b794f6);
+
+	border-radius: inherit;
+
+	box-shadow: 0 0 14px rgba(139, 92, 246, 0.4);
+
+	transition: width 300ms ease;
+}
+
+.xpFooter {
+	display: flex;
+	justify-content: space-between;
+	gap: 8px;
+
+	font-size: 11px;
+	color: #918b9b;
+}
+
+/* =========================================
+   STATISTICS
+   ========================================= */
+
+.statisticsSection {
+	display: flex;
+	flex-direction: column;
+	gap: 13px;
+}
+
+.sectionTitle {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+}
+
+.sectionTitle svg {
+	color: #a78bfa;
+}
+
+.sectionTitle h3 {
+	margin: 0;
+
+	font-size: 14px;
+	font-weight: 650;
+
+	color: #f3f0f7;
+}
+
+.statisticsGrid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 10px;
+}
+
+.statCard {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+
+	min-width: 0;
+	padding: 13px 14px;
+
+	background: #19151f;
+
+	border: 1px solid #302838;
+	border-radius: 12px;
+}
+
+.statHeading {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+
+	font-size: 11px;
+	font-weight: 500;
+
+	color: #a49bad;
+}
+
+.statValue {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1;
+
+	color: #f3f0f7;
+}
+
+.statKnown .statHeading svg {
+	color: #34d399;
+}
+
+.statLearning .statHeading svg {
+	color: #f87171;
+}
+
+.statFavorite .statHeading svg {
+	color: #fb7185;
+}
+
+.statStreak .statHeading svg {
+	color: #fbbf24;
+}
+
+/* =========================================
+   CALENDAR
+   ========================================= */
+
+.calendarSection {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.calendarHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.monthLabel {
+	font-size: 13px;
+	font-weight: 600;
+
+	color: #d8d0e2;
+}
+
+.monthNavigation {
+	display: flex;
+	gap: 5px;
+}
+
+.monthNavigation button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 28px;
+	height: 28px;
+	padding: 0;
+
+	color: #a49bad;
+	background: #19151f;
+
+	border: 1px solid #302838;
+	border-radius: 8px;
+
+	cursor: pointer;
+}
+
+.monthNavigation button:hover:not(:disabled) {
+	color: #c4b5fd;
+	border-color: rgba(167, 139, 250, 0.4);
+}
+
+.monthNavigation button:disabled {
+	opacity: 0.3;
+	cursor: not-allowed;
+}
+
+.calendarGrid {
+	display: grid;
+	grid-template-columns: repeat(7, minmax(0, 1fr));
+	gap: 6px;
+}
+
+.weekday {
+	padding: 4px 0 6px;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 10px;
+	font-weight: 600;
+	text-align: center;
+
+	color: #918b9b;
+}
+
+.emptyDay {
+	min-height: 34px;
+}
+
+.calendarDay {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	min-width: 0;
+	height: 34px;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 11px;
+	font-weight: 500;
+
+	color: #a49bad;
+
+	border: 1px solid transparent;
+	border-radius: 8px;
+}
+
+.intensity0 {
+	background: #1d1823;
+}
+
+.intensity1 {
+	background: #302047;
+	color: #c4b5fd;
+}
+
+.intensity2 {
+	background: #49316d;
+	color: #e4d8ff;
+}
+
+.intensity3 {
+	background: #6845a2;
+	color: #f3f0f7;
+}
+
+.intensity4 {
+	background: #8b5cf6;
+	color: #ffffff;
+}
+
+.today {
+	border-color: #c4b5fd;
+
+	box-shadow: inset 0 0 0 1px rgba(196, 181, 253, 0.2);
+}
+
+.futureDay {
+	opacity: 0.35;
+}
+
+.calendarFooter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+}
+
+.calendarFooter > span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+
+	font-size: 10px;
+	color: #a49bad;
+}
+
+.calendarFooter > span svg {
+	color: #fbbf24;
+}
+
+.legend {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.legend > span:first-child,
+.legend > span:last-child {
+	font-size: 9px;
+	color: #918b9b;
+}
+
+.legendSquare {
+	width: 10px;
+	height: 10px;
+
+	border-radius: 3px;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 576px) {
+	.popover {
+		width: min(390px, calc(100vw - 20px));
+		padding: 16px;
+		border-radius: 15px;
+	}
+
+	.avatar {
+		width: 54px;
+		height: 54px;
+	}
+
+	.nickname {
+		font-size: 18px;
+	}
+
+	.editableField {
+		padding: 6px 8px;
+		font-size: 11px;
+	}
+
+	.statCard {
+		padding: 12px;
+	}
+
+	.calendarGrid {
+		gap: 4px;
+	}
+
+	.calendarDay {
+		height: 32px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.popover {
+		animation: none;
+	}
+
+	.xpFill,
+	.editButton,
+	.editableField,
+	.avatarEditOverlay {
+		transition: none;
+	}
+}

@@ -1,17 +1,17 @@
 :root {
 	/* Backgrounds */
-	--bg-primary: #090b10;
-	--bg-secondary: #0f121a;
-	--bg-elevated: #151925;
+	--bg-primary: #09090d;
+	--bg-secondary: #111015;
+	--bg-elevated: #17131d;
 
 	/* Borders */
-	--border: #232838;
+	--border: #302838;
 	--border-accent: rgba(139, 92, 246, 0.35);
 
 	/* Text */
-	--text-primary: #f1f5f9;
-	--text-secondary: #94a3b8;
-	--text-muted: #64748b;
+	--text-primary: #f3f0f7;
+	--text-secondary: #a49bad;
+	--text-muted: #918b9b;
 
 	/* Brand */
 	--accent: #8b5cf6;
@@ -19,9 +19,10 @@
 	--accent-soft: rgba(139, 92, 246, 0.12);
 
 	/* Semantic */
-	--success: #2dd4bf;
+	--success: #34d399;
 	--danger: #fb7185;
 }
+
 body {
 	margin: 0;
 	min-height: 100dvh;
@@ -30,9 +31,9 @@ body {
 
 	background:
 		radial-gradient(
-			circle at 50% 15%,
-			rgba(124, 58, 237, 0.1),
-			transparent 35%
+			ellipse at 50% 0%,
+			rgba(139, 92, 246, 0.045),
+			transparent 45%
 		),
 		var(--bg-primary);
 }

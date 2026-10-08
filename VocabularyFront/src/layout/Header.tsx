@@ -1,20 +1,23 @@
 import styles from "./Header.module.css";
+
 import wordflowLogo from "../assets/images/Logo.png";
 import Account from "../components/Account/Account";
-import StatisticsMenu from "../components/StatisticsMenu/StatisticsMenu";
 
 const Header = () => {
 	return (
-		<section className={styles.navbar}>
+		<header className={styles.navbar}>
 			<div className={styles.header}>
 				<div className={styles.logo}>
 					<img className={styles.logoImage} src={wordflowLogo} alt="Wordflow" />
 				</div>
-				<Account />
-				<StatisticsMenu />
+
+				<div className={styles.headerRight}>
+					<Account />
+				</div>
 			</div>
+
 			<hr className={styles.hr} />
-		</section>
+		</header>
 	);
 };
 

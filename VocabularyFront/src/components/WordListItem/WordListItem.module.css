@@ -1,0 +1,328 @@
+/* =========================================
+   WORD LIST ITEM
+   ========================================= */
+
+.item {
+	display: flex;
+	align-items: center;
+	gap: 18px;
+
+	width: 100%;
+	min-width: 0;
+	min-height: 90px;
+	padding: 12px 18px;
+	box-sizing: border-box;
+
+	color: #f3f0f7;
+	background: #111015;
+	border: 1px solid #29232f;
+	border-radius: 14px;
+
+	cursor: pointer;
+
+	transition:
+		background-color 180ms ease,
+		border-color 180ms ease,
+		box-shadow 180ms ease;
+}
+
+.item:hover {
+	background: #19151f;
+	border-color: rgba(167, 139, 250, 0.32);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+/* =========================================
+   IMAGE
+   ========================================= */
+
+.imageContainer {
+	width: 76px;
+	height: 62px;
+	flex-shrink: 0;
+	overflow: hidden;
+
+	background: #1c1723;
+	border-radius: 10px;
+}
+
+.image {
+	display: block;
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+	opacity: 0.85;
+}
+
+/* =========================================
+   WORD
+   ========================================= */
+
+.wordInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+
+	flex: 1 1 190px;
+	min-width: 0;
+}
+
+.wordHeading {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 9px;
+}
+
+.word {
+	margin: 0;
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 16px;
+	font-weight: 700;
+
+	color: #f3f0f7;
+}
+
+.partOfSpeech {
+	padding: 3px 6px;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 10px;
+	font-weight: 500;
+
+	color: #a49bad;
+	background: #211a29;
+	border: 1px solid #302838;
+	border-radius: 5px;
+
+	white-space: nowrap;
+}
+
+.transcription {
+	font-size: 13px;
+	color: #a78bfa;
+}
+
+/* =========================================
+   TRANSLATION
+   ========================================= */
+
+.translation {
+	flex: 1 1 200px;
+	min-width: 0;
+
+	font-size: 14px;
+	line-height: 1.5;
+
+	color: #c7bdcf;
+	overflow-wrap: anywhere;
+}
+
+/* =========================================
+   LEVEL
+   ========================================= */
+
+.level {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 40px;
+	height: 28px;
+	flex-shrink: 0;
+
+	font-family: "JetBrains Mono", monospace;
+	font-size: 11px;
+	font-weight: 700;
+
+	border: 1px solid transparent;
+	border-radius: 8px;
+}
+
+.levelA2 {
+	color: #34d399;
+	background: rgba(52, 211, 153, 0.12);
+	border-color: rgba(52, 211, 153, 0.2);
+}
+
+.levelB1 {
+	color: #60a5fa;
+	background: rgba(96, 165, 250, 0.12);
+	border-color: rgba(96, 165, 250, 0.2);
+}
+
+.levelB2 {
+	color: #a78bfa;
+	background: rgba(167, 139, 250, 0.12);
+	border-color: rgba(167, 139, 250, 0.2);
+}
+
+.levelC1 {
+	color: #fb923c;
+	background: rgba(251, 146, 60, 0.12);
+	border-color: rgba(251, 146, 60, 0.2);
+}
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.status {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+
+	width: 88px;
+	flex-shrink: 0;
+
+	font-size: 12px;
+	font-weight: 500;
+	color: #a49bad;
+}
+
+.statusDot {
+	width: 7px;
+	height: 7px;
+	flex-shrink: 0;
+
+	background: currentColor;
+	border-radius: 50%;
+}
+
+.statusknown {
+	color: #34d399;
+}
+
+.statusunknown {
+	color: #f87171;
+}
+
+.statusunseen {
+	color: #a49bad;
+}
+
+/* =========================================
+   ACTIONS
+   ========================================= */
+
+.favoriteButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 34px;
+	height: 34px;
+	flex-shrink: 0;
+
+	padding: 0;
+
+	color: #918b9b;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 9px;
+
+	cursor: pointer;
+
+	transition:
+		color 150ms ease,
+		background-color 150ms ease;
+}
+
+.favoriteButton:hover {
+	color: #fb7185;
+	background: rgba(251, 113, 133, 0.1);
+}
+
+.favoriteActive {
+	color: #fb7185;
+}
+
+.chevron {
+	flex-shrink: 0;
+	color: #706878;
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 900px) {
+	.item {
+		gap: 12px;
+		padding: 12px 14px;
+	}
+
+	.imageContainer {
+		width: 64px;
+		height: 58px;
+	}
+
+	.wordInfo {
+		flex-basis: 150px;
+	}
+
+	.translation {
+		flex-basis: 150px;
+	}
+
+	.status {
+		width: 70px;
+	}
+
+	.chevron {
+		display: none;
+	}
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+	.item {
+		flex-wrap: wrap;
+		gap: 10px 12px;
+		padding: 12px;
+	}
+
+	.imageContainer {
+		width: 58px;
+		height: 58px;
+	}
+
+	.wordInfo {
+		flex: 1 1 calc(100% - 120px);
+	}
+
+	.word {
+		font-size: 14px;
+	}
+
+	.translation {
+		order: 5;
+		flex: 1 1 100%;
+
+		padding-left: 0;
+		font-size: 13px;
+	}
+
+	.level {
+		width: 36px;
+		height: 26px;
+	}
+
+	.status {
+		width: auto;
+		margin-left: auto;
+	}
+
+	.favoriteButton {
+		width: 30px;
+		height: 30px;
+	}
+}

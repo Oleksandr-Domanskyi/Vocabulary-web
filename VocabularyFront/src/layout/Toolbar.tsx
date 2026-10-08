@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-
+import { LayoutGrid, List } from "lucide-react";
+import type { ViewMode } from "./CardCollection";
 import styles from "./Toolbar.module.css";
 
-type LevelFilter = "all" | "A2" | "B1" | "B2" | "C1";
+export type LevelFilter = "all" | "A2" | "B1" | "B2" | "C1";
 
-type StatusFilter =
+export type StatusFilter =
 	| "all"
 	| "unseen"
 	| "known"
@@ -18,6 +19,26 @@ interface StatusOption {
 	color: string;
 }
 
+interface ToolbarProps {
+	search: string;
+	onSearchChange: (value: string) => void;
+
+	levelFilter: LevelFilter;
+	onLevelChange: (value: LevelFilter) => void;
+
+	statusFilter: StatusFilter;
+	onStatusChange: (value: StatusFilter) => void;
+
+	onReset: () => void;
+
+	filteredWordsCount: number;
+	totalWordsCount: number;
+	totalStudied: number;
+
+	viewMode: ViewMode;
+	onViewModeChange: (mode: ViewMode) => void;
+}
+
 const LEVELS: LevelFilter[] = ["all", "A2", "B1", "B2", "C1"];
 
 const STATUS_OPTIONS: StatusOption[] = [
@@ -29,7 +50,7 @@ const STATUS_OPTIONS: StatusOption[] = [
 	{
 		value: "unseen",
 		label: "Новые",
-		color: "#94a3b8",
+		color: "#a49bad",
 	},
 	{
 		value: "known",
@@ -49,17 +70,24 @@ const STATUS_OPTIONS: StatusOption[] = [
 	{
 		value: "archived",
 		label: "Архив",
-		color: "#60a5fa",
+		color: "#a78bfa",
 	},
 ];
 
-const Toolbar = () => {
-	const [search, setSearch] = useState("");
-
-	const [levelFilter, setLevelFilter] = useState<LevelFilter>("all");
-
-	const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
-
+const Toolbar = ({
+	search,
+	onSearchChange,
+	levelFilter,
+	onLevelChange,
+	statusFilter,
+	onStatusChange,
+	onReset,
+	filteredWordsCount,
+	totalWordsCount,
+	totalStudied,
+	viewMode,
+	onViewModeChange,
+}: ToolbarProps) => {
 	const [levelMenuOpen, setLevelMenuOpen] = useState(false);
 
 	const [statusMenuOpen, setStatusMenuOpen] = useState(false);
@@ -67,18 +95,10 @@ const Toolbar = () => {
 	const levelRef = useRef<HTMLDivElement>(null);
 	const statusRef = useRef<HTMLDivElement>(null);
 
-	/*
-	 * Temporary data.
-	 * Потом сюда можно передать реальные значения через props.
-	 */
-	const filteredWordsCount = 4;
-	const totalWordsCount = 8;
-	const totalStudied = 4;
-
-	const progress = totalWordsCount > 0 ? totalStudied / totalWordsCount : 0;
+	const progress =
+		totalWordsCount > 0 ? Math.min(1, totalStudied / totalWordsCount) : 0;
 
 	const circleLength = 72.26;
-
 	const circleOffset = circleLength * (1 - progress);
 
 	const activeStatus =
@@ -119,20 +139,17 @@ const Toolbar = () => {
 	};
 
 	const handleLevelSelect = (level: LevelFilter) => {
-		setLevelFilter(level);
+		onLevelChange(level);
 		setLevelMenuOpen(false);
 	};
 
 	const handleStatusSelect = (status: StatusFilter) => {
-		setStatusFilter(status);
+		onStatusChange(status);
 		setStatusMenuOpen(false);
 	};
 
 	const resetFilters = () => {
-		setSearch("");
-		setLevelFilter("all");
-		setStatusFilter("all");
-
+		onReset();
 		setLevelMenuOpen(false);
 		setStatusMenuOpen(false);
 	};
@@ -140,7 +157,6 @@ const Toolbar = () => {
 	return (
 		<div className={styles.toolbar}>
 			{/* SEARCH */}
-
 			<div className={`${styles.search} ${search ? styles.searchActive : ""}`}>
 				<svg
 					className={styles.searchIcon}
@@ -156,7 +172,6 @@ const Toolbar = () => {
 						stroke="currentColor"
 						strokeWidth="1.4"
 					/>
-
 					<path
 						d="M10.5 10.5l3.25 3.25"
 						stroke="currentColor"
@@ -169,7 +184,7 @@ const Toolbar = () => {
 					className={styles.searchInput}
 					type="search"
 					value={search}
-					onChange={(event) => setSearch(event.target.value)}
+					onChange={(event) => onSearchChange(event.target.value)}
 					placeholder="Найти слово или перевод"
 					aria-label="Поиск слов"
 				/>
@@ -178,7 +193,7 @@ const Toolbar = () => {
 					<button
 						type="button"
 						className={styles.clearSearch}
-						onClick={() => setSearch("")}
+						onClick={() => onSearchChange("")}
 						aria-label="Очистить поиск">
 						<svg width="9" height="9" viewBox="0 0 9 9" fill="none">
 							<path
@@ -193,7 +208,6 @@ const Toolbar = () => {
 			</div>
 
 			{/* LEVEL */}
-
 			<div ref={levelRef} className={styles.dropdown}>
 				<button
 					type="button"
@@ -215,7 +229,6 @@ const Toolbar = () => {
 
 						<span className={styles.dropdownInformation}>
 							<span className={styles.dropdownLabel}>Уровень</span>
-
 							<span className={styles.dropdownValue}>
 								{levelFilter === "all" ? "Любой" : levelFilter}
 							</span>
@@ -253,7 +266,6 @@ const Toolbar = () => {
 			</div>
 
 			{/* STATUS */}
-
 			<div ref={statusRef} className={styles.dropdown}>
 				<button
 					type="button"
@@ -299,7 +311,6 @@ const Toolbar = () => {
 												styles[`statusDot${capitalize(status.value)}`]
 											}`}
 										/>
-
 										{status.label}
 									</span>
 
@@ -322,7 +333,6 @@ const Toolbar = () => {
 			</div>
 
 			{/* RESET */}
-
 			{filtersActive && (
 				<button
 					type="button"
@@ -342,7 +352,6 @@ const Toolbar = () => {
 			)}
 
 			{/* RESULT */}
-
 			<div className={styles.result}>
 				<div className={styles.progressCircle}>
 					<svg width="30" height="30" viewBox="0 0 30 30">
@@ -368,9 +377,38 @@ const Toolbar = () => {
 
 				<div className={styles.resultText}>
 					<strong>{filteredWordsCount}</strong>
-
 					<span>слов найдено</span>
 				</div>
+			</div>
+
+			{/* VIEW MODE */}
+			<div
+				className={styles.viewSwitcher}
+				role="group"
+				aria-label="Режим отображения слов">
+				<button
+					type="button"
+					className={`${styles.viewButton} ${
+						viewMode === "grid" ? styles.viewButtonActive : ""
+					}`}
+					onClick={() => onViewModeChange("grid")}
+					title="Карточки"
+					aria-label="Отображение карточками"
+					aria-pressed={viewMode === "grid"}>
+					<LayoutGrid size={17} strokeWidth={1.8} />
+				</button>
+
+				<button
+					type="button"
+					className={`${styles.viewButton} ${
+						viewMode === "list" ? styles.viewButtonActive : ""
+					}`}
+					onClick={() => onViewModeChange("list")}
+					title="Список"
+					aria-label="Отображение списком"
+					aria-pressed={viewMode === "list"}>
+					<List size={18} strokeWidth={1.8} />
+				</button>
 			</div>
 		</div>
 	);
