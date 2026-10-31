@@ -1,25 +1,13 @@
 using MediatR;
+using Vocabulary.Application.Mappers.Vocabulary;
 using Vocabulary.Core.DTO.Request;
+using Vocabulary.Core.DTO.Request.Vocabulary;
+using Vocabulary.Core.DTO.Response;
 using Vocabulary.Core.Entity;
 
-namespace Vocabulary.Application.CQRS.Command
-{
-    public class CreateVocabularyCommand : IRequest<VocabularyItem>
-    {
-        public VocabularyItem VocabularyItem { get; set; }
+namespace Vocabulary.Application.CQRS.Command;
 
-        public CreateVocabularyCommand(CreateVocabularyRequest request)
-        {
-            VocabularyItem = new VocabularyItem
-            {
-                Id = Guid.NewGuid(),
-                Word = request.Word,
-                Type = request.Type,
-                Definition = request.Definition,
-                EnglishLevel = request.EnglishLevel,
-                Examples = request.ExampleTexts?.Select(text => new Example { ExampleText = text }).ToList(),
-                UserId = request.UserId
-            };
-        }
-    }
+public class CreateVocabularyCommand(CreateVocabularyRequest request) : IRequest<VocabularyResponse>
+{
+    public VocabularyModel VocabularyItem { get; set; } = VocabularyMapper.CreateRequestToVocabularyModel(request);
 }

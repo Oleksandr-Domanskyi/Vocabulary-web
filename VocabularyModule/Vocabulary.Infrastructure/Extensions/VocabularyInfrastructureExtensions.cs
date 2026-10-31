@@ -8,16 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using Vocabulary.Infrastructure.Data;
 using Vocabulary.Infrastructure.Repository;
 
-namespace Vocabulary.Infrastructure.Extensions
-{
-    public static class VocabularyInfrastructureExtensions
-    {
-        public static void AddVocabularyInfrastructure(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddDbContext<VocabularyDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("Default")));
+namespace Vocabulary.Infrastructure.Extensions;
 
-            services.AddScoped<IVocabularyRepository, VocabularyRepository>();
-        }
+public static class VocabularyInfrastructureExtensions
+{
+    public static void AddVocabularyInfrastructure(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddDbContext<VocabularyDbContext>(options =>
+            options.UseNpgsql(configuration.GetConnectionString("Default")));
+
+        services.AddScoped<IVocabularyRepository, VocabularyRepository>();
     }
 }

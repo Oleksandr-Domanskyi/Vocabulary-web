@@ -1,25 +1,14 @@
 using MediatR;
+using Vocabulary.Application.Mappers.Vocabulary;
 using Vocabulary.Core.DTO.Request;
+using Vocabulary.Core.DTO.Request.Vocabulary;
+using Vocabulary.Core.DTO.Response;
 using Vocabulary.Core.Entity;
 
-namespace Vocabulary.Application.CQRS.Command
-{
-    public class UpdateVocabularyCommand : IRequest<VocabularyItem>
-    {
-        public VocabularyItem VocabularyItem { get; set; }
+namespace Vocabulary.Application.CQRS.Command;
 
-        public UpdateVocabularyCommand(Guid Id, UpdateVocabularyRequest request)
-        {
-            VocabularyItem = new VocabularyItem
-            {
-                Id = Id,
-                Word = request.Word,
-                Type = request.Type,
-                Definition = request.Definition,
-                EnglishLevel = request.EnglishLevel,
-                Examples = request.Examples,
-                UserId = request.UserId
-            };
-        }
-    }
+public class UpdateVocabularyCommand(Guid Id, UpdateVocabularyRequest request) : IRequest<VocabularyResponse>
+{
+    public Guid Id { get; set; } = Id;
+    public UpdateVocabularyRequest Vocabulary { get; set; } = request;
 }

@@ -1,15 +1,14 @@
 using Vocabulary.Core.Entity;
 
-namespace Vocabulary.Infrastructure.Repository
+namespace Vocabulary.Infrastructure.Repository;
+
+public interface IVocabularyRepository
 {
-    public interface IVocabularyRepository
-    {
-        Task<List<VocabularyItem>> GetAllAsync();
-        Task<VocabularyItem?> GetByWordAsync(string word);
-        Task<VocabularyItem?> GetByIdAsync(Guid id);
-        Task<VocabularyItem> CreateAsync(VocabularyItem item);
-        Task<VocabularyItem> UpdateAsync(VocabularyItem item);
-        Task<bool> DeleteAsync(Guid id);
-        Task<bool> DeleteByWordAsync(string word);
-    }
+    Task<List<VocabularyModel>> GetAllAsync();
+    Task<VocabularyModel?> GetByWordAsync(string word);
+    Task<VocabularyModel?> GetByIdAsync(Guid id);
+    Task<VocabularyModel> CreateAsync(VocabularyModel item);
+    Task<VocabularyModel> UpdateAsync(VocabularyModel item);
+    Task<bool> DeleteAsync(Guid id);
+    Task<bool> DeleteByWordAsync(string word);
 }

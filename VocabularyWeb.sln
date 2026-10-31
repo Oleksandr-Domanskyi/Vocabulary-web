@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vocabulary.Core", "Vocabula
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vocabulary.Infrastructure", "VocabularyModule\Vocabulary.Infrastructure\Vocabulary.Infrastructure.csproj", "{D3374BFF-4A49-4EA8-80A9-62EA2543D0CC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VocabularyModule", "VocabularyModule", "{D1D01A23-B6B4-D415-01C9-F97D7EF66DF7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vocabulary.Application", "VocabularyModule\Vocabulary.Application\Vocabulary.Application.csproj", "{52ED0195-B769-4BAC-8AEF-CA4328EB4A0A}"
 EndProject
 Global
@@ -74,8 +72,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{52ED0195-B769-4BAC-8AEF-CA4328EB4A0A} = {D1D01A23-B6B4-D415-01C9-F97D7EF66DF7}
 	EndGlobalSection
 EndGlobal

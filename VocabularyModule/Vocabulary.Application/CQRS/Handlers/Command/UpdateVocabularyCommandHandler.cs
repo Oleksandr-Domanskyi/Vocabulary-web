@@ -1,22 +1,19 @@
 using MediatR;
 using Vocabulary.Application.CQRS.Command;
+using Vocabulary.Application.Mappers.Vocabulary;
+using Vocabulary.Core.DTO.Response;
 using Vocabulary.Core.Entity;
 using Vocabulary.Infrastructure.Repository;
 
-namespace Vocabulary.Application.CQRS.Handlers.Command
+namespace Vocabulary.Application.CQRS.Handlers.Command;
+
+public class UpdateVocabularyCommandHandler(IVocabularyRepository repository) : IRequestHandler<UpdateVocabularyCommand, VocabularyResponse>
 {
-    public class UpdateVocabularyCommandHandler : IRequestHandler<UpdateVocabularyCommand, VocabularyItem>
+    private readonly IVocabularyRepository _repository = repository;
+
+    public async Task<VocabularyResponse> Handle(UpdateVocabularyCommand request, CancellationToken cancellationToken)
     {
-        private readonly IVocabularyRepository _repository;
-
-        public UpdateVocabularyCommandHandler(IVocabularyRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<VocabularyItem> Handle(UpdateVocabularyCommand request, CancellationToken cancellationToken)
-        {
-            return await _repository.UpdateAsync(request.VocabularyItem);
-        }
+        var model = await _repository.GetByIdAsync(request.Id);
+        return VocabularyMapper.VocabularyModelToResponse(await _repository.UpdateAsync(VocabularyMapper.UpdateRequestToVocabularyModel(model!, request.Vocabulary)));
     }
 }

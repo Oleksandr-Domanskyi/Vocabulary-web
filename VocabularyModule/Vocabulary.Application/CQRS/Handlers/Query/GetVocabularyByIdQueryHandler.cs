@@ -1,22 +1,24 @@
 using MediatR;
+using Vocabulary.Application.Common.Errors;
+using Vocabulary.Application.Common.Exeptions;
 using Vocabulary.Application.CQRS.Query;
+using Vocabulary.Application.Mappers.Vocabulary;
+using Vocabulary.Core.DTO.Response;
 using Vocabulary.Core.Entity;
 using Vocabulary.Infrastructure.Repository;
 
-namespace Vocabulary.Application.CQRS.Handlers.Query
+namespace Vocabulary.Application.CQRS.Handlers.Query;
+
+public class GetVocabularyByIdQueryHandler(IVocabularyRepository repository) : IRequestHandler<GetVocabularyByIdQuery, VocabularyResponse?>
 {
-    public class GetVocabularyByIdQueryHandler : IRequestHandler<GetVocabularyByIdQuery, VocabularyItem?>
+    private readonly IVocabularyRepository _repository = repository;
+
+    public async Task<VocabularyResponse?> Handle(GetVocabularyByIdQuery request, CancellationToken cancellationToken)
     {
-        private readonly IVocabularyRepository _repository;
+        var response = await _repository.GetByIdAsync(request.Id);
 
-        public GetVocabularyByIdQueryHandler(IVocabularyRepository repository)
-        {
-            _repository = repository;
-        }
-
-        public async Task<VocabularyItem?> Handle(GetVocabularyByIdQuery request, CancellationToken cancellationToken)
-        {
-            return await _repository.GetByWordAsync(request.Word);
-        }
+        return response is null
+            ? throw new VocabularyException(VocabularyErrors.NotFound(request.Id))
+            : VocabularyMapper.VocabularyModelToResponse(response);
     }
 }

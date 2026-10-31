@@ -3,13 +3,13 @@
 	"tasks": [
 		{
 			"label": "build",
-			"command": "dotnet",
 			"type": "process",
+			"command": "dotnet",
 			"args": [
 				"build",
-				"${workspaceFolder}/VocabularyWeb.sln",
-				"/property:GenerateFullPaths=true",
-				"/p:Configuration=Debug"
+				"${workspaceFolder}/VocabularyModule/Vocabulary.API/Vocabulary.API.csproj",
+				"-c",
+				"Debug"
 			],
 			"problemMatcher": "$msCompile",
 			"group": {
@@ -18,16 +18,10 @@
 			}
 		},
 		{
-			"label": "publish",
-			"command": "dotnet",
-			"type": "process",
-			"args": [
-				"publish",
-				"${workspaceFolder}/VocabularyWeb.sln",
-				"/property:GenerateFullPaths=true",
-				"/p:Configuration=Release"
-			],
-			"problemMatcher": "$msCompile"
+			"label": "stop-api",
+			"type": "shell",
+			"command": "echo Debug session ended",
+			"problemMatcher": []
 		}
 	]
 }

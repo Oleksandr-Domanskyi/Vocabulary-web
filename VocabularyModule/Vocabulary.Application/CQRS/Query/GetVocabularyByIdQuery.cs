@@ -1,15 +1,10 @@
 using MediatR;
+using Vocabulary.Core.DTO.Response;
 using Vocabulary.Core.Entity;
 
-namespace Vocabulary.Application.CQRS.Query
-{
-    public class GetVocabularyByIdQuery : IRequest<VocabularyItem?>
-    {
-        public string Word { get; set; } = default!;
+namespace Vocabulary.Application.CQRS.Query;
 
-        public GetVocabularyByIdQuery(string word)
-        {
-            Word = word;
-        }
-    }
+public class GetVocabularyByIdQuery(Guid Id) : IRequest<VocabularyResponse?>
+{
+    public Guid Id { get; set; } = Id;
 }

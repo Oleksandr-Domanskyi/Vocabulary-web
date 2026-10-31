@@ -1,15 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+namespace Vocabulary.Core.Entity;
 
-namespace Vocabulary.Core.Entity
+public class Example : BaseEntity<Example>
 {
-    public class Example
-    {
-        public Guid Id { get; set; }
-        public string ExampleText { get; set; } = default!;
-
-        public Guid WordId { get; set; }
-    }
+    public Guid WordId { get; set; } = default!;
+    public string Sentences { get; set; } = default!;
 }
