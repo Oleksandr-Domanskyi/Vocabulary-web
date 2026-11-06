@@ -2,26 +2,17 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"label": "build",
+			"label": "build Backend.API",
 			"type": "process",
 			"command": "dotnet",
 			"args": [
 				"build",
-				"${workspaceFolder}/VocabularyModule/Vocabulary.API/Vocabulary.API.csproj",
-				"-c",
+				"${workspaceFolder}/Backend/Backend.API/Backend.API.csproj",
+				"--configuration",
 				"Debug"
 			],
 			"problemMatcher": "$msCompile",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			}
-		},
-		{
-			"label": "stop-api",
-			"type": "shell",
-			"command": "echo Debug session ended",
-			"problemMatcher": []
+			"group": "build"
 		}
 	]
 }

@@ -2,11 +2,12 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Vocabulary.API - Swagger",
+			"name": "Backend.API - Swagger",
 			"type": "coreclr",
 			"request": "launch",
-			"program": "${workspaceFolder}/VocabularyModule/Vocabulary.API/bin/Debug/net10.0/Vocabulary.API.dll",
-			"cwd": "${workspaceFolder}/VocabularyModule/Vocabulary.API",
+			"preLaunchTask": "build Backend.API",
+			"program": "${workspaceFolder}/Backend/Backend.API/bin/Debug/net10.0/Backend.API.dll",
+			"cwd": "${workspaceFolder}/Backend/Backend.API",
 			"console": "internalConsole",
 			"env": {
 				"ASPNETCORE_ENVIRONMENT": "Development",
