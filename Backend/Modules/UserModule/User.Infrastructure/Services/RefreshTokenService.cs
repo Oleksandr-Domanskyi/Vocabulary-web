@@ -4,7 +4,7 @@ using User.Infrastructure.Repositories.IRepositories;
 
 namespace User.Infrastructure.Services;
 
-public sealed class RefreshTokenServices(IRefreshTokenRepository repository) : IRefreshTokenService
+public sealed class RefreshTokenService(IRefreshTokenRepository repository) : IRefreshTokenService
 {
     public Task<RefreshToken?> GetByTokenHashAsync(string tokenHash) => repository.GetByTokenHashAsync(tokenHash);
     public Task<RefreshToken> CreateAsync(RefreshToken token) => repository.CreateAsync(token);

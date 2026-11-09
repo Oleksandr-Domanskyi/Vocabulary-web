@@ -1,30 +1,60 @@
-
 using Microsoft.EntityFrameworkCore;
 using Vocabulary.Core.Entity;
 using Vocabulary.Core.Entity.Enum;
 using Vocabulary.Core.Entity.Translation;
 using Vocabulary.Core.Entity.Vocabulary;
+using Vocabulary.Core.Entity.UserMarks;
 using Vocabulary.Infrastructure.Data;
 using VocabularyDictionary = Vocabulary.Core.Entity.Vocabulary.Dictionary;
 
 namespace Vocabulary.Infrastructure.Seed;
 
 /// <summary>
-/// Seeds the global vocabulary and repairs missing related data on subsequent runs.
+/// Seeds 20 global words and 10 personal demo words with related data.
 /// Existing words and their non-empty values are preserved.
 /// </summary>
 public static class VocabularySeed
 {
-    public static async Task SeedAsync(
+    // Global catalog: UserId = null.
+    public static Task SeedAsync(
         VocabularyDbContext context,
+        CancellationToken cancellationToken = default) =>
+        SeedForOwnerAsync(context, null, CreateSeedWords(), cancellationToken);
+
+    // Personal copies: the demo user owns these rows via VocabularyModel.UserId.
+    public static async Task SeedUserVocabularyAsync(
+        VocabularyDbContext context,
+        Guid userId,
         CancellationToken cancellationToken = default)
     {
+        if (userId == Guid.Empty)
+            throw new ArgumentException("User ID cannot be empty.", nameof(userId));
+
+        var demoWords = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Eloquent", "Ephemeral", "Ubiquitous", "Pragmatic", "Ambiguous",
+            "Meticulous", "Resilient", "Serendipity", "Nostalgia", "Diligent"
+        };
+
+        var personalWords = CreateSeedWords()
+            .Where(x => demoWords.Contains(x.Word))
+            .ToList();
+
+        foreach (var word in personalWords)
+            word.UserId = userId;
+
+        await SeedForOwnerAsync(context, userId, personalWords, cancellationToken);
+        await SeedUserMarksAsync(context, userId, cancellationToken);
+    }
+
+    private static async Task SeedForOwnerAsync(VocabularyDbContext context, Guid? userId, List<VocabularyModel> seedWords, CancellationToken cancellationToken)
+    {
         var existingWords = await context.VocabularyModels
-            .Where(x => x.UserId == null)
+            .Where(x => x.UserId == userId)
             .Include(x => x.Examples)
             .Include(x => x.Dictionaries)
             .Include(x => x.Translations)
-                .ThenInclude(x => x.TranslationExamples)
+            .ThenInclude(x => x.TranslationExamples)
             .AsSplitQuery()
             .ToListAsync(cancellationToken);
 
@@ -35,6 +65,19 @@ public static class VocabularySeed
                 group => group.First(),
                 StringComparer.OrdinalIgnoreCase);
 
+        foreach (var seedWord in seedWords)
+        {
+            if (existingByWord.TryGetValue(seedWord.Word, out var existing))
+                AddMissingRelations(existing, seedWord);
+            else
+                context.VocabularyModels.Add(seedWord);
+        }
+
+        await context.SaveChangesAsync(cancellationToken);
+    }
+
+    private static List<VocabularyModel> CreateSeedWords()
+    {
         var seedWords = new List<VocabularyModel>
         {
             CreateVocabularyItem(
@@ -298,15 +341,80 @@ public static class VocabularySeed
                 ])
         };
 
-        foreach (var seedWord in seedWords)
+        return seedWords;
+    }
+
+    // Marks are optional until the three UserMarks entities are mapped and migrated.
+    private static async Task SeedUserMarksAsync(
+        VocabularyDbContext context,
+        Guid userId,
+        CancellationToken cancellationToken)
+    {
+        if (context.Model.FindEntityType(typeof(VocabularyFavorite)) is null ||
+            context.Model.FindEntityType(typeof(VocabularyLearned)) is null ||
+            context.Model.FindEntityType(typeof(VocabularyArchived)) is null)
+            return;
+
+        var words = await context.VocabularyModels
+            .Where(x => x.UserId == userId)
+            .Select(x => new { x.Id, x.Word })
+            .ToListAsync(cancellationToken);
+
+        var favorites = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
-            if (existingByWord.TryGetValue(seedWord.Word, out var existing))
+            "Eloquent", "Resilient", "Ubiquitous"
+        };
+        var learned = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Eloquent", "Pragmatic", "Diligent", "Nostalgia"
+        };
+        var archived = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Ephemeral"
+        };
+
+        var existingFavorites = (await context.Set<VocabularyFavorite>()
+            .Where(x => x.UserId == userId)
+            .Select(x => x.VocabularyId)
+            .ToListAsync(cancellationToken)).ToHashSet();
+
+        var existingLearned = (await context.Set<VocabularyLearned>()
+            .Where(x => x.UserId == userId)
+            .Select(x => x.VocabularyId)
+            .ToListAsync(cancellationToken)).ToHashSet();
+
+        var existingArchived = (await context.Set<VocabularyArchived>()
+            .Where(x => x.UserId == userId)
+            .Select(x => x.VocabularyId)
+            .ToListAsync(cancellationToken)).ToHashSet();
+
+        foreach (var word in words)
+        {
+            if (favorites.Contains(word.Word) && existingFavorites.Add(word.Id))
             {
-                AddMissingRelations(existing, seedWord);
+                context.Set<VocabularyFavorite>().Add(new VocabularyFavorite
+                {
+                    UserId = userId,
+                    VocabularyId = word.Id
+                });
             }
-            else
+
+            if (learned.Contains(word.Word) && existingLearned.Add(word.Id))
             {
-                context.VocabularyModels.Add(seedWord);
+                context.Set<VocabularyLearned>().Add(new VocabularyLearned
+                {
+                    UserId = userId,
+                    VocabularyId = word.Id
+                });
+            }
+
+            if (archived.Contains(word.Word) && existingArchived.Add(word.Id))
+            {
+                context.Set<VocabularyArchived>().Add(new VocabularyArchived
+                {
+                    UserId = userId,
+                    VocabularyId = word.Id
+                });
             }
         }
 

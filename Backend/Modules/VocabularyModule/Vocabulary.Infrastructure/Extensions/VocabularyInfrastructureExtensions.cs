@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
 using Vocabulary.Infrastructure.Data;
 using Vocabulary.Infrastructure.Repository;
+using Backend.Shared.Extensions;
 
 namespace Vocabulary.Infrastructure.Extensions;
 
@@ -14,8 +10,7 @@ public static class VocabularyInfrastructureExtensions
 {
     public static void AddVocabularyInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<VocabularyDbContext>(options =>
-            options.UseNpgsql(configuration.GetConnectionString("Default")));
+        services.AddDatabase<VocabularyDbContext>(configuration);
 
         services.AddScoped<IVocabularyRepository, VocabularyRepository>();
     }

@@ -8,11 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.14">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Modules\UserModule\User.API\User.API.csproj" />
     <ProjectReference Include="..\Modules\VocabularyModule\Vocabulary.API\Vocabulary.API.csproj" />
+    <ProjectReference Include="..\Shared\Backend.Shared\Backend.Shared.csproj" />
   </ItemGroup>
 
 </Project>

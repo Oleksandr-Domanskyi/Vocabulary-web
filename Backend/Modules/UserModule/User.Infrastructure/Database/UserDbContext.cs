@@ -11,4 +11,13 @@ public class UserDbContext(DbContextOptions<UserDbContext> options) : GlobalVoca
     public DbSet<RefreshToken> RefreshTokens { get; set; } = default!;
     public DbSet<UserActivity> UserActivities { get; set; } = default!;
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfiguration(new Configuration.UserModelConfiguration());
+        modelBuilder.ApplyConfiguration(new Configuration.RefreshTokenConfiguration());
+        modelBuilder.ApplyConfiguration(new Configuration.UserActivityConfiguration());
+    }
+
 }

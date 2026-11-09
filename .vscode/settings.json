@@ -1,14 +1,14 @@
 {
-	"dotnet.defaultSolution": "VocabularyWeb.sln",
-	"csharp-dev-tools.entityFramework.migrationPreferences": {
-		"VocabularyWeb.sln": {
-			"startupProject": "VocabularyModule\\Vocabulary.API\\Vocabulary.API.csproj",
-			"migrationsProject": "VocabularyModule\\Vocabulary.Infrastructure\\Vocabulary.Infrastructure.csproj",
-			"dbContextClass": "VocabularyDbContext",
-			"migrationsFolder": "Migrations",
-			"targetMigration": ""
-		}
-	},
-	"csharp-dev-tools.debug.skipBuild": false,
-	"csharp-dev-tools.debug.programArguments": ""
+  "dotnet.defaultSolution": "VocabularyWeb.sln",
+  "csharp-dev-tools.entityFramework.migrationPreferences": {
+    "VocabularyWeb.sln": {
+      "startupProject": "Backend\\Backend.API\\Backend.API.csproj",
+      "migrationsProject": "Backend\\Modules\\VocabularyModule\\Vocabulary.Infrastructure\\Vocabulary.Infrastructure.csproj",
+      "dbContextClass": "VocabularyDbContext",
+      "migrationsFolder": "Migrations",
+      "targetMigration": ""
+    }
+  },
+  "csharp-dev-tools.debug.skipBuild": false,
+  "csharp-dev-tools.debug.programArguments": ""
 }

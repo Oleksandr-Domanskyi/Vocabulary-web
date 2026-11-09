@@ -7,13 +7,13 @@ namespace Vocabulary.API.Extensions;
 
 public static class VocabularySeederExtensions
 {
-    public static async Task SeedVocabularyAsync(this WebApplication app)
+    public static async Task SeedUserVocabularyAsync(this WebApplication app, Guid? userId)
     {
-        using var scope = app.Services.CreateScope();
+        await using var scope = app.Services.CreateAsyncScope();
 
         var context = scope.ServiceProvider
             .GetRequiredService<VocabularyDbContext>();
 
-        await VocabularySeed.SeedAsync(context);
+        await VocabularySeed.SeedUserVocabularyAsync(context, userId!.Value);
     }
 }

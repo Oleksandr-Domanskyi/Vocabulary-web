@@ -4,7 +4,7 @@ using User.Infrastructure.Repositories.IRepositories;
 
 namespace User.Infrastructure.Services;
 
-public sealed class UserActivityServices(IUserActivityRepository repository) : IUserActivityService
+public sealed class UserActivityService(IUserActivityRepository repository) : IUserActivityService
 {
     // Queries
 
