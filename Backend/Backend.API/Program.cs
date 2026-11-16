@@ -2,6 +2,8 @@ using Vocabulary.API.Endpoints;
 using Vocabulary.API.Extensions;
 using User.API.Extensions;
 using User.API.Endpoints;
+using Microsoft.OpenApi;
+using Backend.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +11,7 @@ builder.Services.AddVocabularyModule(builder.Configuration);
 builder.Services.AddUserModule(builder.Configuration);
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerExtension();
 
 var app = builder.Build();
 
@@ -25,7 +27,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-VocabularyEndpoints.MapVocabularyEndpoints(app);
-app.MapUserEndpoints();
+app.MapApplicationEndpoints();
 
 app.Run();

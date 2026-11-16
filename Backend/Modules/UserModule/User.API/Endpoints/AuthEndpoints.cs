@@ -1,8 +1,15 @@
 
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using User.API.Routes;
+using User.Application.CQRS.Auth.LoginUser;
+using User.Application.CQRS.Auth.LogoutUser;
+using User.Application.CQRS.Auth.RefreshUserToken;
+using User.Application.CQRS.Auth.RegisterUser;
+using User.Application.DTO.Requests.Auth;
 
 namespace User.API.Endpoints;
 
@@ -13,7 +20,7 @@ public static class AuthEndpoints
         var group = app.MapGroup(AuthRoutes.Base)
             .WithTags("Auth");
 
-        group.MapPost(AuthRoutes.Register, NotImplemented)
+        group.MapPost(AuthRoutes.Register, Register)
             .WithName("RegisterUser")
             .WithSummary("Register a new user")
             .WithDescription(
@@ -21,7 +28,7 @@ public static class AuthEndpoints
                 "and subscription claims.")
             .ProducesProblem(StatusCodes.Status501NotImplemented);
 
-        group.MapPost(AuthRoutes.Login, NotImplemented)
+        group.MapPost(AuthRoutes.Login, Login)
             .WithName("LoginUser")
             .WithSummary("Authenticate a user")
             .WithDescription(
@@ -30,7 +37,7 @@ public static class AuthEndpoints
                 "and a refresh token.")
             .ProducesProblem(StatusCodes.Status501NotImplemented);
 
-        group.MapPost(AuthRoutes.Refresh, NotImplemented)
+        group.MapPost(AuthRoutes.Refresh, Refresh)
             .WithName("RefreshUserToken")
             .WithSummary("Refresh authentication tokens")
             .WithDescription(
@@ -39,7 +46,7 @@ public static class AuthEndpoints
                 "The previous refresh token is revoked.")
             .ProducesProblem(StatusCodes.Status501NotImplemented);
 
-        group.MapPost(AuthRoutes.Logout, NotImplemented)
+        group.MapPost(AuthRoutes.Logout, Logout)
             .WithName("LogoutUser")
             .WithSummary("Log out the current user")
             .WithDescription(
@@ -49,7 +56,7 @@ public static class AuthEndpoints
             .RequireAuthorization()
             .ProducesProblem(StatusCodes.Status501NotImplemented);
 
-        group.MapPost(AuthRoutes.ConfirmEmail, NotImplemented)
+        group.MapPost(AuthRoutes.ConfirmEmail, ConfirmEmail)
             .WithName("ConfirmUserEmail")
             .WithSummary("Confirm user email address")
             .WithDescription(
@@ -57,7 +64,7 @@ public static class AuthEndpoints
                 "token issued during registration.")
             .ProducesProblem(StatusCodes.Status501NotImplemented);
 
-        group.MapPost(AuthRoutes.ForgotPassword, NotImplemented)
+        group.MapPost(AuthRoutes.ForgotPassword, ForgotPassword)
             .WithName("ForgotUserPassword")
             .WithSummary("Request a password reset")
             .WithDescription(
@@ -66,7 +73,7 @@ public static class AuthEndpoints
                 "to the user's email address.")
             .ProducesProblem(StatusCodes.Status501NotImplemented);
 
-        group.MapPost(AuthRoutes.ResetPassword, NotImplemented)
+        group.MapPost(AuthRoutes.ResetPassword, ResetPassword)
             .WithName("ResetUserPassword")
             .WithSummary("Reset user password")
             .WithDescription(
@@ -75,9 +82,77 @@ public static class AuthEndpoints
             .ProducesProblem(StatusCodes.Status501NotImplemented);
     }
 
-    // Replace placeholders with MediatR commands when handlers are implemented.
-    private static IResult NotImplemented() =>
-        Results.Problem(
-            statusCode: StatusCodes.Status501NotImplemented,
-            title: "Endpoint not implemented");
+    private static async Task<IResult> Register([FromBody] RegisterUserRequest request, IMediator mediator)
+    {
+        var result = await mediator.Send(new RegisterUserCommand(request));
+
+        if (!result.IsSuccess)
+        {
+            return Results.Problem(
+                detail: string.Join("; ", result.Errors.Select(e => e.Message)),
+                statusCode: StatusCodes.Status400BadRequest,
+                title: "User registration failed");
+        }
+        return Results.Ok(
+            "User registered successfully. Please check your email to confirm your account."
+        );
+    }
+
+    private static async Task<IResult> Login([FromBody] LoginUserRequest request, IMediator mediator)
+    {
+        var result = await mediator.Send(new LoginUserCommand(request));
+
+        if (!result.IsSuccess)
+        {
+            return Results.Problem(
+                detail: string.Join("; ", result.Errors.Select(e => e.Message)),
+                statusCode: StatusCodes.Status400BadRequest,
+                title: "User login failed");
+        }
+        return Results.Ok(result.Value);
+    }
+    private static async Task<IResult> Logout([FromBody] LogoutUserRequest request, IMediator mediator)
+    {
+        var result = await mediator.Send(new LogoutUserCommand(request));
+
+        if (!result.IsSuccess)
+        {
+            return Results.Problem(
+                detail: string.Join("; ", result.Errors.Select(e => e.Message)),
+                statusCode: StatusCodes.Status400BadRequest,
+                title: "User logout failed");
+        }
+        return Results.Ok("User logged out successfully.");
+    }
+
+    private static async Task<IResult> Refresh([FromBody] RefreshTokenRequest request, IMediator mediator)
+    {
+        var result = await mediator.Send(new RefreshUserTokenCommand(request));
+
+        if (!result.IsSuccess)
+        {
+            return Results.Problem(
+                detail: string.Join("; ", result.Errors.Select(e => e.Message)),
+                statusCode: StatusCodes.Status400BadRequest,
+                title: "Token refresh failed");
+        }
+        return Results.Ok(result.Value);
+    }
+
+    //!Not Realized Endpoints
+    private static async Task<IResult> ResetPassword([FromBody] ResetPasswordRequest request, IMediator mediator)
+        => Results.Problem(
+                    statusCode: StatusCodes.Status501NotImplemented,
+                    title: "Endpoint not implemented");
+
+    private static async Task<IResult> ForgotPassword([FromBody] ForgotPasswordRequest request, IMediator mediator)
+    => Results.Problem(
+                statusCode: StatusCodes.Status501NotImplemented,
+                title: "Endpoint not implemented");
+
+    private static async Task<IResult> ConfirmEmail([FromBody] ConfirmEmailRequest request, IMediator mediator)
+        => Results.Problem(
+                    statusCode: StatusCodes.Status501NotImplemented,
+                    title: "Endpoint not implemented");
+
 }

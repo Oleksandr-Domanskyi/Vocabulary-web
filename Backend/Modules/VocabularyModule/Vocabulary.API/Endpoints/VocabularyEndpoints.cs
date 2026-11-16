@@ -13,7 +13,7 @@ namespace Vocabulary.API.Endpoints;
 
 public static class VocabularyEndpoints
 {
-    public static void MapVocabularyEndpoints(WebApplication app)
+    public static void MapVocabularyEndpoints(this WebApplication app)
     {
         var group = app.MapGroup(VocabularyRoutes.BaseRoute)
             .WithTags(RouteNames.Base);
