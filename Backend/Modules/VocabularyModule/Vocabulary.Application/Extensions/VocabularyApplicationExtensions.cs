@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
+using Backend.Shared.Extensions;
 
 namespace Vocabulary.Application.Extensions
 {
@@ -13,6 +14,8 @@ namespace Vocabulary.Application.Extensions
         {
             services.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(typeof(VocabularyApplicationExtensions).Assembly));
+
+            services.AddRequestValidation(typeof(VocabularyApplicationExtensions).Assembly);
         }
     }
 }

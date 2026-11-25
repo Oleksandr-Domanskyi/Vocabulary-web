@@ -11,6 +11,7 @@ public class CreateVocabularyCommandHandler(IVocabularyRepository repository) : 
 
     public async Task<VocabularyResponse> Handle(CreateVocabularyCommand request, CancellationToken cancellationToken)
     {
-        return VocabularyMapper.VocabularyModelToResponse(await _repository.CreateAsync(request.VocabularyItem));
+        var model = VocabularyMapper.CreateRequestToVocabularyModel(request.Vocabulary);
+        return VocabularyMapper.VocabularyModelToResponse(await _repository.CreateAsync(model));
     }
 }

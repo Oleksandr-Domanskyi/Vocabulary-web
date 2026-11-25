@@ -188,9 +188,7 @@ public static class UserEndpoints
                     : StatusCodes.Status400BadRequest;
 
         return Results.Problem(
-            detail: string.Join(
-                "; ",
-                result.Errors.Select(e => e.Message)),
+            detail: string.Join("; ", result.Errors.Select(e => e.Message)),
             statusCode: statusCode,
             title: title);
     }

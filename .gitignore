@@ -53,6 +53,8 @@ TestResults/
 .env.production.local
 *.log
 
+CLAUDE.md
+
 # ASP.NET configuration
 appsettings.json
 appsettings.Development.json
@@ -107,5 +109,5 @@ Thumbs.db
 !.vscode/extensions.json
 !.vscode/settings.json
 
-# VS Code 
+# VS Code
 .vscodecsdt/Runners/

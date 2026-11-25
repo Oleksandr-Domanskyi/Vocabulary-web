@@ -4,6 +4,7 @@ using User.API.Extensions;
 using User.API.Endpoints;
 using Microsoft.OpenApi;
 using Backend.API.Extensions;
+using Backend.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddSwaggerExtension();
 var app = builder.Build();
 
 app.UseCorsExtension();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 //Seeder
 var userId = await app.SeedUserAsync();
